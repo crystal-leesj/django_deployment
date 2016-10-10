@@ -39,7 +39,7 @@ def create(request):
     result = Review.objects.create_review(request.POST, request.session['user']['id'])
 
     if result[0] == True:
-        return redirect(reverse('reviews:show', kwargs={'id': result[1].book.id }))
+        return redirect(reverse('reviews:index', kwargs={'id': result[1].book.id }))
     else:
         print_messages(request, result[1])
         return redirect(reverse('reviews:new'))
