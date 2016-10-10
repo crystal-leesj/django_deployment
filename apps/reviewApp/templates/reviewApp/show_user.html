@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>User Reviews</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <a class="btn btn-warning" href="{% url 'reviews:index' %}" role="button">Home</a>
+        <a class="btn btn-info" href="{% url 'reviews:new' %}" role="button">Add book and Review</a>
+        <a class="btn btn-warning" href="{% url 'users:logout' %}" role="button">Logout</a>
+      </div>
+      <div class="row">
+        <h3>User Alias: {{user.first_name}}</h3>
+        <h4>Name: {{user.first_name}} {{user.last_name}}</h4>
+        <h4>Email: {{user.email}}</h4>
+        <h4>Total Review: {{user.total_reviews}}</h4>
+        <br>
+        <h3>Posted Reviews on the following books:</h3>
+        {% for review in user.review_set.all %}
+          <p><a href="{% url 'reviews:show' id=review.book.id %}">{{review.book.title}}</a></p>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
